@@ -1,0 +1,169 @@
+object fxMain: TfxMain
+  Left = 0
+  Top = 0
+  Caption = 'EONET Viewer'
+  ClientHeight = 673
+  ClientWidth = 1158
+  WindowState = wsMaximized
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object lyMain: TLayout
+    Align = Client
+    Size.Width = 1158.000000000000000000
+    Size.Height = 673.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object ProgressBar1: TProgressBar
+      Align = MostBottom
+      Orientation = Horizontal
+      Position.Y = 659.000000000000000000
+      Size.Width = 1158.000000000000000000
+      Size.Height = 14.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object Layout1: TLayout
+      Align = Right
+      Position.X = 950.000000000000000000
+      Size.Width = 208.000000000000000000
+      Size.Height = 560.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object btnRequestImage: TButton
+        Align = Bottom
+        Position.Y = 527.000000000000000000
+        Size.Width = 208.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'RequestImage'
+        OnClick = btnRequestImageClick
+      end
+      object btnRequest: TButton
+        Align = Bottom
+        Position.Y = 490.000000000000000000
+        Size.Width = 208.000000000000000000
+        Size.Height = 37.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'btnRequest'
+        OnClick = btnRequestClick
+      end
+      object btnFullSize: TButton
+        Align = Bottom
+        Position.Y = 456.000000000000000000
+        Size.Width = 208.000000000000000000
+        Size.Height = 34.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'btnFullSize'
+        OnClick = btnFullSizeClick
+      end
+      object ListBox1: TListBox
+        Align = Client
+        Size.Width = 208.000000000000000000
+        Size.Height = 456.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        ShowSizeGrip = True
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        OnItemClick = ListBox1ItemClick
+        Viewport.Width = 204.000000000000000000
+        Viewport.Height = 452.000000000000000000
+      end
+    end
+    object Layout2: TLayout
+      Align = Bottom
+      Position.Y = 560.000000000000000000
+      Size.Width = 1158.000000000000000000
+      Size.Height = 99.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object mLogbox: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        TextSettings.WordWrap = True
+        Align = Client
+        Cursor = crDefault
+        Size.Width = 1158.000000000000000000
+        Size.Height = 99.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Viewport.Width = 1154.000000000000000000
+        Viewport.Height = 95.000000000000000000
+      end
+    end
+    object Layout3: TLayout
+      Align = Client
+      Size.Width = 950.000000000000000000
+      Size.Height = 560.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object Layout4: TLayout
+        Align = Right
+        Position.X = 768.000000000000000000
+        Size.Width = 182.000000000000000000
+        Size.Height = 560.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object Calendar1: TCalendar
+          Align = Top
+          Date = 42777.000000000000000000
+          Size.Width = 182.000000000000000000
+          Size.Height = 160.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          OnChange = Calendar1Change
+        end
+        object GroupBox1: TGroupBox
+          Align = Client
+          Size.Width = 182.000000000000000000
+          Size.Height = 400.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'EPIC INFO'
+          TabOrder = 1
+        end
+      end
+      object ImageViewer1: TImageViewer
+        Align = Client
+        Size.Width = 768.000000000000000000
+        Size.Height = 560.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        BitmapScale = 0.959999978542327900
+        Viewport.Width = 764.000000000000000000
+        Viewport.Height = 556.000000000000000000
+      end
+    end
+  end
+  object NetHTTPClient1: TNetHTTPClient
+    Asynchronous = False
+    ConnectionTimeout = 60000
+    ResponseTimeout = 60000
+    AllowCookies = True
+    HandleRedirects = True
+    UserAgent = 'Embarcadero URI Client/1.0'
+    OnRequestCompleted = NetHTTPClient1RequestCompleted
+    OnRequestError = NetHTTPClient1RequestError
+    OnReceiveData = NetHTTPClient1ReceiveData
+    Left = 24
+    Top = 16
+  end
+  object NetHTTPRequest1: TNetHTTPRequest
+    Asynchronous = False
+    ConnectionTimeout = 60000
+    ResponseTimeout = 60000
+    MethodString = 'GET'
+    Client = NetHTTPClient1
+    OnRequestCompleted = NetHTTPRequest1RequestCompleted
+    OnRequestError = NetHTTPRequest1RequestError
+    OnReceiveData = NetHTTPRequest1ReceiveData
+    Left = 136
+    Top = 16
+  end
+end

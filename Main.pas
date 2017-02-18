@@ -1,7 +1,10 @@
 unit Main;
-
+
 interface
 
+{ TODO 1 -oHillfolk -cImage :이미지 데이터 한번에 받아서 애니메이션 하기
+  http://docwiki.embarcadero.com/CodeExamples/Berlin/en/FMX.TSwipeTransitionEffect_Animation
+}
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants,
@@ -12,7 +15,8 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Jsons, FMX.ListBox,
-  FMX.Calendar, FMX.Effects, FMX.Filter.Effects;
+  FMX.Calendar, FMX.Effects, FMX.Filter.Effects, FMX.Ani,
+  System.Generics.Collections;
 
 type
   rcoordinates = record
@@ -50,6 +54,14 @@ type
     attitude_quaternions: rattitude_quaternions;
     coords: string;
     date: TDateTime;
+  end;
+
+  TEpicData = class(TObject)
+   {이미지와 함께 저장}
+    FImage: TBitmap;
+    FName: string;
+    FUrl: string;
+    Frepicdata: repicdata;
   end;
 
   TfxMain = class(TForm)
@@ -96,6 +108,7 @@ type
     FBaseURL: string;
     FArcValue: double;
     FDataArray: TArray<repicdata>;
+    FDataPair: TDictionary<string, TEpicData>;
     function Pasing(AJson: string): repicdata;
   public
     { Public declarations }
@@ -232,6 +245,7 @@ var
   buf: String;
   LTask: ITask;
 begin
+
   LTask := TTask.Create(
     procedure()
     begin
@@ -347,3 +361,4 @@ begin
 end;
 
 end.
+

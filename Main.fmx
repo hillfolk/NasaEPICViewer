@@ -9,6 +9,7 @@ object fxMain: TfxMain
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object lyMain: TLayout
     Align = Client
@@ -110,7 +111,7 @@ object fxMain: TfxMain
         Size.Width = 182.000000000000000000
         Size.Height = 560.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 1
+        TabOrder = 0
         object Calendar1: TCalendar
           Align = Top
           Date = 42777.000000000000000000
@@ -129,15 +130,14 @@ object fxMain: TfxMain
           TabOrder = 1
         end
       end
-      object ImageViewer1: TImageViewer
+      object Image1: TImage
+        MultiResBitmap = <
+          item
+          end>
         Align = Client
         Size.Width = 768.000000000000000000
         Size.Height = 560.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 0
-        BitmapScale = 0.959999978542327900
-        Viewport.Width = 764.000000000000000000
-        Viewport.Height = 556.000000000000000000
       end
     end
   end
@@ -148,7 +148,6 @@ object fxMain: TfxMain
     AllowCookies = True
     HandleRedirects = True
     UserAgent = 'Embarcadero URI Client/1.0'
-    OnRequestCompleted = NetHTTPClient1RequestCompleted
     OnRequestError = NetHTTPClient1RequestError
     OnReceiveData = NetHTTPClient1ReceiveData
     Left = 24

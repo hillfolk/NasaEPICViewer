@@ -68,7 +68,7 @@ type
     Layout4: TLayout;
     Calendar1: TCalendar;
     GroupBox1: TGroupBox;
-    ImageViewer1: TImageViewer;
+    Image1: TImage;
     procedure btnRequestClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure NetHTTPClient1ReceiveData(const Sender: TObject;
@@ -89,6 +89,7 @@ type
     procedure Calendar1Change(Sender: TObject);
     procedure ListBox1ItemClick(const Sender: TCustomListBox;
       const Item: TListBoxItem);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     FStream: TStream;
@@ -109,6 +110,8 @@ const
 
 implementation
 
+uses Description;
+
 {$R *.fmx}
 
 procedure TfxMain.ArcDial1Change(Sender: TObject);
@@ -123,7 +126,7 @@ begin
 
   if Assigned(FStream) then
   begin
-    ImageViewer1.Bitmap.LoadFromStream(FStream);
+    Image1.Bitmap.LoadFromStream(FStream);
   end;
 end;
 
@@ -173,6 +176,13 @@ begin
   FBaseURL := 'https://api.nasa.gov/EPIC/api/natural/images?api_key=' + APIKey;
 end;
 
+procedure TfxMain.FormShow(Sender: TObject);
+begin
+  fxDescription := TfxDescription.Create(Self);
+  fxDescription.ShowModal;
+
+end;
+
 procedure TfxMain.ListBox1ItemClick(const Sender: TCustomListBox;
   const Item: TListBoxItem);
 var
@@ -196,6 +206,11 @@ begin
   Log(LImageUrl);
   AResponseStream := TMemoryStream.Create;
   NetHTTPClient1.Get(LImageUrl, AResponseStream);
+  try
+    Image1.Bitmap.LoadFromStream(AResponseStream);
+  except
+    on E: Exception do
+  end;
 
 end;
 
@@ -222,8 +237,8 @@ begin
     begin
       try
         FStream := AResponse.ContentStream;
-        ImageViewer1.Bitmap.LoadFromStream(FStream);
-        ImageViewer1.BestFit;
+        Image1.Bitmap.LoadFromStream(FStream);
+
       except
       end;
     end);
